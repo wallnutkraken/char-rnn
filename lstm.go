@@ -2,7 +2,6 @@ package charrnn
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -107,8 +106,9 @@ func (l *LSTM) Train(samples SampleList) {
 	sgd.Run(rip.NewRIP().Chan())
 }
 
-func (l *LSTM) Generate() {
+func (l *LSTM) Generate() string {
 	state := l.Block.Start(1)
+	var text string
 
 	last := oneHotAscii(0)
 	seedBytes := []byte(l.Seed)
@@ -119,7 +119,7 @@ func (l *LSTM) Generate() {
 			ch = int(seedBytes[i])
 		}
 
-		fmt.Print(string([]byte{byte(ch)}))
+		text += string([]byte{byte(ch)})
 
 		v := make([]float32, CharCount)
 		v[ch] = 1
@@ -127,7 +127,7 @@ func (l *LSTM) Generate() {
 		state = res.State()
 	}
 
-	fmt.Println()
+	return text
 }
 
 func (l *LSTM) Name() string {
