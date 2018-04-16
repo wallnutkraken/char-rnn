@@ -3,7 +3,6 @@ package charrnn
 import (
 	"encoding/json"
 	"flag"
-	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -88,21 +87,22 @@ func (m *Markov) Train(s SampleList) {
 	log.Println("Validation entropy:", m.averageEntropy(validation.(SampleList)))
 }
 
-func (m *Markov) Generate() {
+func (m *Markov) Generate() string {
 	state := []byte{}
+	var text string
 	for {
 		next := m.selectRandom(state)
 		if next == 0 {
 			break
 		}
-		fmt.Print(string(next))
+		text += string(next)
 		state = m.appendState(state, next)
 	}
-	fmt.Println()
+	return text
 }
 
 func (m *Markov) SerializerType() string {
-	return "github.com/unixpickle/char-rnn.Markov"
+	return "github.com/wallnutkraken/char-rnn.Markov"
 }
 
 func (m *Markov) Serialize() ([]byte, error) {

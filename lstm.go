@@ -135,7 +135,7 @@ func (l *LSTM) Name() string {
 }
 
 func (l *LSTM) SerializerType() string {
-	return "github.com/unixpickle/char-rnn.LSTM"
+	return "github.com/wallnutkraken/char-rnn.LSTM"
 }
 
 func (l *LSTM) Serialize() ([]byte, error) {

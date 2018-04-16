@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/gob"
 	"flag"
-	"fmt"
 	"log"
 	"runtime"
 	"sync"
@@ -82,12 +81,13 @@ func (h *HMM) Train(s SampleList) {
 	}
 }
 
-func (h *HMM) Generate() {
+func (h *HMM) Generate() string {
 	_, seq := h.HMM.Sample(nil)
+	var text string
 	for _, character := range seq {
-		fmt.Print(string([]byte{character.(byte)}))
+		text += string([]byte{character.(byte)})
 	}
-	fmt.Println()
+	return text
 }
 
 func (h *HMM) SerializerType() string {

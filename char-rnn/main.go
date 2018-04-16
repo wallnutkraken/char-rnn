@@ -9,7 +9,7 @@ import (
 	"time"
 
 	_ "github.com/unixpickle/anyplugin"
-	charrnn "github.com/unixpickle/char-rnn"
+	charrnn "github.com/wallnutkraken/char-rnn"
 	"github.com/unixpickle/serializer"
 )
 
@@ -101,7 +101,7 @@ func genCommand() {
 	}
 
 	model.GenerationFlags().Parse(os.Args[3:])
-	model.Generate()
+	fmt.Println(model.Generate())
 }
 
 func helpCommand() {

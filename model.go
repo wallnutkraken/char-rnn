@@ -17,5 +17,5 @@ type Model interface {
 	GenerationFlags() *flag.FlagSet
 
 	Train(samples SampleList)
-	Generate()
+	Generate() string
 }
