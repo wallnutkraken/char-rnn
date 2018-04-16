@@ -16,7 +16,6 @@ import (
 	"github.com/unixpickle/essentials"
 	"github.com/unixpickle/lazyseq"
 	"github.com/unixpickle/lazyseq/lazyrnn"
-	"github.com/unixpickle/rip"
 	"github.com/unixpickle/serializer"
 )
 
