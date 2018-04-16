@@ -16,6 +16,6 @@ type Model interface {
 	TrainingFlags() *flag.FlagSet
 	GenerationFlags() *flag.FlagSet
 
-	Train(samples SampleList)
+	Train(samples SampleList, endChan chan struct{})
 	Generate() string
 }

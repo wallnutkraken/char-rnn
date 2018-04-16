@@ -41,7 +41,7 @@ func DeserializeLSTM(d []byte) (*LSTM, error) {
 	return &LSTM{Block: b}, nil
 }
 
-func (l *LSTM) Train(samples SampleList) {
+func (l *LSTM) Train(samples SampleList, endChan chan struct{}) {
 	if l.Block == nil {
 		l.createModel()
 	}
@@ -103,7 +103,7 @@ func (l *LSTM) Train(samples SampleList) {
 	log.Println("Training (ctrl+c to stop)...")
 	l.setDropout(true)
 	defer l.setDropout(false)
-	sgd.Run(rip.NewRIP().Chan())
+	sgd.Run(endChan)
 }
 
 func (l *LSTM) Generate() string {

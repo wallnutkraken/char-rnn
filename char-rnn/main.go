@@ -9,11 +9,11 @@ import (
 	"time"
 
 	_ "github.com/unixpickle/anyplugin"
-	charrnn "github.com/wallnutkraken/char-rnn"
+	"github.com/wallnutkraken/char-rnn"
 	"github.com/unixpickle/serializer"
 )
 
-var Models = []charrnn.Model{&charrnn.LSTM{}, &charrnn.Markov{}, &charrnn.HMM{}}
+var Models = []charrnn.Model{&charrnn.LSTM{}}
 
 const OutputPermissions = 0755
 
@@ -64,7 +64,7 @@ func trainCommand() {
 	}
 
 	model.TrainingFlags().Parse(os.Args[5:])
-	model.Train(samples)
+	model.Train(samples, make(chan struct{}, 0))
 
 	encoded, err := serializer.SerializeWithType(model)
 	if err != nil {
